@@ -1,0 +1,17 @@
+{% if todo_list %} 
+    <h3>Existing todos are : -</h3>
+    <ul>
+        {% for todo in todo_list %} 
+            <li>{{ todo.content }} &nbsp; <a href="{% url 'todos:deletetodo' todo.id %}">Delete</a> &nbsp; <a href="{% url 'todos:editform' todo.id %}">Edit</a></li>
+        {% endfor %}
+    </ul>
+{% else %} 
+    <p>You don't have any todos</p>
+{% endif %}
+
+<h3>Create Todos</h3>
+<form action="{% url 'todos:addtodo' %}" method="post">
+{% csrf_token %}
+    <input type="text" name="content">
+    <input type="submit" value="submit">
+</form>
